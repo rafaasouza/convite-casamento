@@ -22,14 +22,43 @@
       cursor: pointer;
     }
 
-    img {
+    .imagem {
       width: 100%;
+      display: block;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
 
-    .hidden {
-      display: none;
+    .capa {
+      position: relative;
+      z-index: 2;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .convite-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      opacity: 0;
+      transform: scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .aberto .capa {
+      opacity: 0;
+      transform: scale(1.02);
+      pointer-events: none;
+    }
+
+    .aberto .convite-wrapper {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
     }
 
     .link-area {
@@ -40,51 +69,57 @@
       display: block;
     }
 
+    .link-cerimonia {
+      top: 53.5%;
+    }
+
+    .link-recepcao {
+      top: 63.8%;
+    }
+
+    .link-lista {
+      top: 76.8%;
+    }
   </style>
 </head>
-
 <body>
 
-<div class="container" onclick="abrirConvite()">
+  <div class="container" id="conviteContainer" onclick="abrirConvite()">
 
-  <!-- CAPA (LAÇO) -->
-  <img id="capa" src="convite.1.jpg" alt="Clique para abrir">
+    <!-- PRIMEIRA IMAGEM -->
+    <img id="capa" class="imagem capa" src="convite.1.jpg" alt="Clique para abrir">
 
-  <!-- CONVITE -->
-  <div id="conviteWrapper" class="hidden" style="position: relative;">
-    <img id="convite" src="convite.2.jpg" alt="Convite">
+    <!-- SEGUNDA IMAGEM -->
+    <div id="conviteWrapper" class="convite-wrapper">
+      <img id="convite" class="imagem" src="convite.2.jpg" alt="Convite">
 
-    <!--CERIMÔNIA -->
-    <a class="link-area"
-       href="https://shre.ink/LftZ"
-       target="_blank"
-       style="top: 53.5%;">
-    </a>
+      <!-- CERIMÔNIA -->
+      <a class="link-area link-cerimonia"
+         href="https://www.google.com/maps/place/Par%C3%B3quia+Santo+Ant%C3%B4nio+De+Gopo%C3%BAva+-+Diocese+de+Guarulhos+(SP)/@-23.4605121,-46.5455246,17z/data=!3m1!4b1!4m6!3m5!1s0x94cef56d180a2251:0xa183b3abe1b1610b!8m2!3d-23.4605121!4d-46.5429497!16s%2Fg%2F1ptwpjhlr?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank"
+         onclick="event.stopPropagation()"></a>
 
-    <!--RECEPÇÃO -->
-    <a class="link-area"
-       href="https://www.google.com/maps/dir/Par%C3%B3quia+Santo+Ant%C3%B4nio+De+Gopo%C3%BAva/R.+Paulo+Lenk,+161"
-       target="_blank"
-       style="top: 63.8%;">
-    </a>
+      <!-- RECEPÇÃO -->
+      <a class="link-area link-recepcao"
+         href="https://www.google.com/maps/dir/Par%C3%B3quia+Santo+Ant%C3%B4nio+De+Gopo%C3%BAva+-+Diocese+de+Guarulhos+(SP),+Largo+Santo+Ant%C3%B4nio,+7+-+Gopouva,+Guarulhos+-+SP,+07092-051/R.+Paulo+Lenk,+161+-+Jardim+Zaira,+Guarulhos+-+SP,+07094-040/@-23.4634592,-46.5427588,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x94cef56d180a2251:0xa183b3abe1b1610b!2m2!1d-46.5429497!2d-23.4605121!1m5!1m1!1s0x94cef542fd8821a3:0x8a347d3a31e02188!2m2!1d-46.5330406!2d-23.463453!3e3?entry=ttu&g_ep=EgoyMDI2MDQwOC4wIKXMDSoASAFQAw%3D%3D"
+         target="_blank"
+         onclick="event.stopPropagation()"></a>
 
-    <!-- LISTA -->
-    <a class="link-area"
-       href="https://noivos.casar.com/karine-e-rafael-2026-08-15"
-       target="_blank"
-       style="top: 76.8%;">
-    </a>
+      <!-- LISTA -->
+      <a class="link-area link-lista"
+         href="https://noivos.casar.com/karine-e-rafael-2026-08-15"
+         target="_blank"
+         onclick="event.stopPropagation()"></a>
+    </div>
 
   </div>
 
-</div>
-
-<script>
-  function abrirConvite() {
-    document.getElementById("capa").classList.add("hidden");
-    document.getElementById("conviteWrapper").classList.remove("hidden");
-  }
-</script>
+  <script>
+    function abrirConvite() {
+      const container = document.getElementById("conviteContainer");
+      container.classList.add("aberto");
+    }
+  </script>
 
 </body>
 </html>
